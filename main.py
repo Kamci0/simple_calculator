@@ -19,7 +19,7 @@ while equation != "0":
     symbol = re.findall(r"[+\-*/]", equation)
 
     if len(symbol) > 1:
-        print("equation is to long ")
+        print("equation is to complex ")
         break
     else:
         for item in qtab:
