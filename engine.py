@@ -32,7 +32,7 @@ class Engine:
         self.equation = data.replace(" ", "")
 
         self.equation = re.sub('[a-zA-Z]', '', self.equation)
-        self.equation = re.sub(r"[\[\]{}()=]", '', self.equation)
+        self.equation = re.sub(r"[\[\]{}()=&^%$#@!]", '', self.equation)
 
         for x in self.equation:
             self.qtab.append(x)

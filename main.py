@@ -28,8 +28,16 @@ icon = PhotoImage(file="icon.png")
 root.iconphoto(True, icon)
 
 # labels
+label_about = Label(root,
+                    text="Equation must have at least one and only one math symbol\nMath symbols that you can use are "
+                         "- + / *\nEvery not numeric character will be ignored\nSame goes for any other non math "
+                         "symbols, for example {, _ & are also ignored",
+                    bg="#555",
+                    fg="#fff",
+                    font=("Arial", 8))
+
 label_info = Label(root,
-                   text="Enter you equation here, 0 to close: ",
+                   text="Enter you equation here",
                    bg="#555",
                    fg="#fff",
                    font=("Arial", 12, "bold"))
@@ -59,5 +67,6 @@ label_info.pack()
 user_input.pack()
 calculate.pack()
 label_result.pack()
+label_about.pack()
 
 root.mainloop()
