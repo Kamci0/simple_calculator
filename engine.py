@@ -28,32 +28,29 @@ class Engine:
         self.result = None
         self.symbol_found = False
 
-    def get_input(self):
-        while True:
-            self.equation = input("Enter you equation here, 0 to close: ").replace(" ", "")
-            if self.equation == 0:
-                break
-            else:
-                self.equation = re.sub('[a-zA-Z]', '', self.equation)
-                self.equation = re.sub(r"[\[\]{}()=]", '', self.equation)
-                break
+    def get_input(self, data):
+        self.equation = data.replace(" ", "")
 
-    def calcutale(self):
+        self.equation = re.sub('[a-zA-Z]', '', self.equation)
+        self.equation = re.sub(r"[\[\]{}()=]", '', self.equation)
+
         for x in self.equation:
             self.qtab.append(x)
 
         self.symbol = re.findall(r"[+\-*/]", self.equation)
 
+        for item in self.qtab:
+            if item in self.symbol:
+                self.symbol_found = True
+            elif not self.symbol_found:
+                self.numbers_before.append(item)
+            elif self.symbol_found:
+                self.numbers_after.append(item)
+
+    def calcutale_result(self):
         if len(self.symbol) > 1:
             print("equation is to complex, use a single math symbol!")
         else:
-            for item in self.qtab:
-                if item in self.symbol:
-                    self.symbol_found = True
-                elif not self.symbol_found:
-                    self.numbers_before.append(item)
-                elif self.symbol_found:
-                    self.numbers_after.append(item)
 
             number_before = int(''.join(self.numbers_before))
             number_after = int(''.join(self.numbers_after))
@@ -66,5 +63,5 @@ class Engine:
             elif "*" in self.symbol:
                 self.result = multiply(number_before, number_after)
 
-    def display_result(self):
+    def get_result(self):
         return self.result
