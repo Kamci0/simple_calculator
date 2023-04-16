@@ -32,7 +32,7 @@ class Engine:
         self.equation = data.replace(" ", "")
 
         self.equation = re.sub('[a-zA-Z]', '', self.equation)
-        self.equation = re.sub(r"[\[\]{}()=&^%$#@!]", '', self.equation)
+        self.equation = re.sub(r"[\[\]{}()=&^%$#@!,.<>?]", '', self.equation)
 
         for x in self.equation:
             self.qtab.append(x)
@@ -48,20 +48,16 @@ class Engine:
                 self.numbers_after.append(item)
 
     def calcutale_result(self):
-        if len(self.symbol) > 1:
-            print("equation is to complex, use a single math symbol!")
-        else:
-
-            number_before = int(''.join(self.numbers_before))
-            number_after = int(''.join(self.numbers_after))
-            if "+" in self.symbol:
-                self.result = add(number_before, number_after)
-            elif "-" in self.symbol:
-                self.result = subtract(number_before, number_after)
-            elif "/" in self.symbol:
-                self.result = divide(number_before, number_after)
-            elif "*" in self.symbol:
-                self.result = multiply(number_before, number_after)
+        number_before = int(''.join(self.numbers_before))
+        number_after = int(''.join(self.numbers_after))
+        if "+" in self.symbol:
+            self.result = add(number_before, number_after)
+        elif "-" in self.symbol:
+            self.result = subtract(number_before, number_after)
+        elif "/" in self.symbol:
+            self.result = divide(number_before, number_after)
+        elif "*" in self.symbol:
+            self.result = multiply(number_before, number_after)
 
     def get_result(self):
         return self.result
