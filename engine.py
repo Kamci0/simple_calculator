@@ -32,7 +32,7 @@ class Engine:
         self.equation = data.replace(" ", "")
 
         self.equation = re.sub('[a-zA-Z]', '', self.equation)
-        self.equation = re.sub(r"[\[\]{}()=&^%$#@!,.<>?]", '', self.equation)
+        self.equation = re.sub(r"[\[\]{}()=&^%$#@!,<>?`~]", '', self.equation)
 
         for x in self.equation:
             self.qtab.append(x)
@@ -47,9 +47,9 @@ class Engine:
             elif self.symbol_found:
                 self.numbers_after.append(item)
 
-    def calcutale_result(self):
-        number_before = int(''.join(self.numbers_before))
-        number_after = int(''.join(self.numbers_after))
+    def calculate_result(self):
+        number_before = float(''.join(self.numbers_before))
+        number_after = float(''.join(self.numbers_after))
         if "+" in self.symbol:
             self.result = add(number_before, number_after)
         elif "-" in self.symbol:
@@ -60,4 +60,7 @@ class Engine:
             self.result = multiply(number_before, number_after)
 
     def get_result(self):
-        return self.result
+        if self.result.is_integer():
+            return int(self.result)
+        else:
+            return float(self.result)

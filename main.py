@@ -13,7 +13,7 @@ def click():
     elif not calculator.symbol_found:
         result = "You didn't provide a proper math symbol"
     else:
-        calculator.calcutale_result()
+        calculator.calculate_result()
         result = calculator.get_result()
     label_result.config(text=result)
 
@@ -21,7 +21,7 @@ def click():
 root = Tk()
 
 # window
-root.geometry("400x500")
+root.geometry("400x200")
 root.config(background="#555")
 root.title("Calculator")
 icon = PhotoImage(file="icon.png")
